@@ -1,0 +1,181 @@
+$dark-cyan: hsl(185, 75%, 39%);
+$very-dark-blue: hsl(229, 23%, 23%);
+$dark-grayish-blue: hsl(227, 10%, 46%);
+$dark-gray: hsl(0, 0%, 59%);
+
+@mixin desktop(){
+    @media only screen and (min-width: 1000px){
+        @content
+    }
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 18px;
+}
+html, body, .background{
+    min-height: 100vh;
+    overflow: hidden;
+
+}
+
+.background{
+    background-color: $dark-cyan;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    isolation: isolate;
+
+    .bg-img{
+        position: absolute;
+        z-index: 1;
+        overflow: hidden;
+        
+        &.top{
+            top: 0;
+            left: 0;
+
+            img{
+                transition: all 200ms ease-in-out;
+                transform: translateX(-40%) translateY(-50%);
+                width: 80vw;
+                @include desktop(){
+                    width: unset;
+                    height: unset;
+                }
+                height: 80vh;
+            }
+
+        }
+
+        &.bottom{
+            bottom: 0;
+            right: 0;
+
+            img{
+                transition: all 200ms ease-in-out;
+                transform: translateX(40%) translateY(50%);
+                width: 80vw;
+                height: 80vh;
+                @include desktop(){
+                    width: unset;
+                    height: unset;
+                }
+                
+            }
+
+        }
+    }
+
+    .card:is(:hover, :active) ~ .bg-img{
+
+        &.top{
+            img{
+                transform: translateX(-30%) translateY(-45%);
+            }
+        }
+
+        &.bottom{
+            img{
+                transform: translateX(30%) translateY(45%);
+            }
+        }
+
+        
+    }
+
+
+}
+
+.card{
+    width: clamp(1px, 100%, 350px);
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    z-index: 2;
+    margin-inline: 1rem;
+    &__header{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        isolation: isolate;
+        
+    }
+
+    &__bg-img{
+        position: absolute;
+        z-index: 1;
+        top: 0;
+    }
+
+    &__profile-image{
+        z-index: 5;
+        width: 108px;
+        height: 108px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 5px solid white;
+        margin-top: 85px;
+        margin-bottom: 20px;
+        img{
+            width: 100%;
+        }
+    }
+
+    &__name{
+        font-weight: 700;
+        margin-bottom: 8px;
+
+    }
+
+    &__age{
+        font-weight: 400;
+        margin-left: 6px;
+        color: $dark-gray;
+    }
+
+    &__city{
+        margin-bottom: 24px;
+        color: $dark-gray;
+        font-size: 14px;
+    }
+
+    &__separator{
+        height: 1px;
+        width: 100%;
+        background-color: $dark-gray;
+        opacity: 0.15;
+    }
+
+    &__footer{
+        display: flex;
+        justify-content: space-evenly;
+        margin-bottom: 22px;
+        padding-top: 26px;
+        
+        &-stats{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+
+        &-number{
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        &-caption{
+            font-size: 12px;
+            color: $dark-gray;
+            letter-spacing: 1.5px;
+        }
+    }
+
+    
+}
